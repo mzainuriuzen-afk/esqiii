@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Esqi - 19 Maret</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      overflow: hidden;
+      background: linear-gradient(135deg, #ff4e88, #ff8ab0, #ffd1dc);
+      height: 100vh;
+      width: 100%;
+      position: relative;
+      color: white;
+    }
+
+    .stars, .hearts, .balloons {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .star {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 2s infinite ease-in-out;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.8); }
+    }
+
+    .heart {
+      position: absolute;
+      color: rgba(255,255,255,0.8);
+      font-size: 18px;
+      animation: floatUp 8s linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) scale(0.8);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.4);
+        opacity: 0;
+      }
+    }
+
+    .balloon {
+      position: absolute;
+      width: 50px;
+      height: 65px;
+      border-radius: 50%;
+      animation: balloonUp 12s linear infinite;
+    }
+
+    .balloon::after {
+      content: "";
+      position: absolute;
+      width: 2px;
+      height: 40px;
+      background: rgba(255,255,255,0.6);
+      left: 50%;
+      top: 65px;
+      transform: translateX(-50%);
+    }
+
+    @keyframes balloonUp {
+      0% {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-120vh);
+        opacity: 0;
+      }
+    }
+
+    .container {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 800px;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(15px);
+      border: 2px solid rgba(255,255,255,0.25);
+      border-radius: 30px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+      text-align: center;
+      padding: 30px 25px;
+      animation: fadeIn 1.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8) translateY(40px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    h1 {
+      font-size: 2.6rem;
+      margin-bottom: 10px;
+      text-shadow: 0 0 15px rgba(255,255,255,0.7);
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: #fff7fa;
+    }
+
+    .date {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      opacity: 0.95;
+    }
+
+    .message {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 25px;
+      min-height: 120px;
+      padding: 0 10px;
+    }
+
+    .highlight {
+      color: #fff3f8;
+      font-weight: bold;
+      text-shadow: 0 0 10px rgba(255,255,255,0.6);
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 15px;
+    }
+
+    button {
+      border: none;
+      padding: 14px 22px;
+      border-radius: 50px;
+      font-size: 1rem;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+      background: white;
+      color: #ff2f74;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    }
+
+    button:hover {
+      transform: scale(1.08);
+      background: #ffe4ee;
+    }
+
+    .surprise-box {
+      margin-top: 25px;
+      display: none;
+      animation: pop 0.8s ease;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.7); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .cake {
+      font-size: 4rem;
+      margin-bottom: 10px;
+      animation: bounce 1.5s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .love-note {
+      font-size: 1rem;
+      line-height: 1.7;
+      background: rgba(255,255,255,0.15);
+      padding: 15px;
+      border-radius: 20px;
+      margin-top: 10px;
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+
+    .click-heart {
+      position: absolute;
+      font-size: 20px;
+      pointer-events: none;
+      animation: clickHeartAnim 1s ease forwards;
+    }
+
+    @keyframes clickHeartAnim {
+      0% {
+        opacity: 1;
+        transform: scale(0.5) translateY(0);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(2) translateY(-60px);
+      }
+    }
+
+    .music-note {
+      margin-top: 15px;
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 2rem; }
+      h2 { font-size: 1.2rem; }
+      .message { font-size: 1rem; }
+      button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="stars" id="stars"></div>
+  <div class="hearts" id="hearts"></div>
+  <div class="balloons" id="balloons"></div>
+
+  <div class="container" id="mainArea">
+    <div class="card">
+      <h1>🎉 Happy Birthday 🎉</h1>
+      <h2>Untuk <span class="highlight">Esqi</span> 💖</h2>
+      <div class="date">Lahir pada <span class="highlight">19 Maret</span> ✨</div>
+
+      <div class="message" id="typedText"></div>
+
+      <div class="buttons">
+        <button onclick="showSurprise()">🎁 Klik Hadiah</button>
+        <button onclick="showWish()">💌 Klik Pesan Cinta</button>
+        <button onclick="playMusic()">🎵 Putar Musik</button>
+        <button onclick="rainHearts()">💖 Hujan Cinta</button>
+      </div>
+
+      <div class="surprise-box" id="surpriseBox">
+        <div class="cake">🎂</div>
+        <div class="love-note" id="surpriseText">
+          Selamat ulang tahun, Esqi. Semoga di umur barumu, semua doa dan harapan indahmu satu per satu jadi kenyataan. 💕
+        </div>
+      </div>
+
+      <div class="music-note">Klik layar juga yaa, ada efek hati lucu 💗</div>
+
+      <div class="footer">
+        Dibuat dengan cinta spesial untuk <span class="highlight">Esqi</span> 💞
+      </div>
+    </div>
+  </div>
+
+  <!-- Musik romantis bebas (ganti link mp3 kalau mau) -->
+  <audio id="bgMusic" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const message = `Selamat ulang tahun, Esqi sayang 💖
+Di tanggal spesial 19 Maret ini, aku cuma mau kamu tahu...
+Kamu adalah alasan kenapa hari-hariku terasa lebih indah,
+lebih berwarna, dan lebih berarti. ✨
+
+Semoga senyummu selalu ada,
+bahagiamu selalu bertambah,
+rezekimu dilancarkan,
+dan semua mimpimu tercapai satu per satu. 🌹
+
+Terima kasih karena sudah hadir dalam hidupku.
+Aku sayang kamu, Esqi. Selalu. 💕`;
+
+    let i = 0;
+    const typedText = document.getElementById("typedText");
+
+    function typeWriter() {
+      if (i < message.length) {
+        typedText.innerHTML += message.charAt(i) === "\n" ? "<br>" : message.charAt(i);
+        i++;
+        setTimeout(typeWriter, 35);
+      }
+    }
+
+    typeWriter();
+
+    function showSurprise() {
+      const box = document.getElementById("surpriseBox");
+      const text = document.getElementById("surpriseText");
+      box.style.display = "block";
+      text.innerHTML = `
+        🎂 <b>Surprise untuk Esqi!</b><br><br>
+        Di hari ulang tahunmu ini, aku berharap kamu selalu dikelilingi cinta, kebahagiaan, dan hal-hal indah.  
+        Semoga tahun ini jadi tahun terbaik buat kamu.  
+        Dan semoga aku tetap bisa jadi bagian dari senyum manismu. 💖✨
+      `;
+      rainHearts();
+    }
+
+    function showWish() {
+      const box = document.getElementById("surpriseBox");
+      const text = document.getElementById("surpriseText");
+      box.style.display = "block";
+      text.innerHTML = `
+        💌 <b>Pesan Cinta Untuk Esqi</b><br><br>
+        Kalau ada satu doa yang paling sering aku ucapkan,  
+        itu adalah semoga kamu selalu sehat, selalu bahagia,  
+        dan selalu merasa dicintai... terutama oleh aku. 💕<br><br>
+        Happy birthday, cintaku. 19 Maret akan selalu jadi hari paling manis. 🌷
+      `;
+    }
+
+    function playMusic() {
+      const music = document.getElementById("bgMusic");
+      music.play();
+      alert("🎵 Musik romantis diputar untuk Esqi 💖");
+    }
+
+    function createStars() {
+      const stars = document.getElementById("stars");
+      for (let i = 0; i < 50; i++) {
+        const star = document.createElement("div");
+        star.classList.add("star");
+        star.style.left = Math.random() * 100 + "vw";
+        star.style.top = Math.random() * 100 + "vh";
+        star.style.animationDuration = (Math.random() * 3 + 1) + "s";
+        stars.appendChild(star);
+      }
+    }
+
+    function createFloatingHearts() {
+      const hearts = document.getElementById("hearts");
+      setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = ["💖", "💕", "💗", "💘"][Math.floor(Math.random() * 4)];
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (Math.random() * 20 + 14) + "px";
+        heart.style.animationDuration = (Math.random() * 4 + 5) + "s";
+        hearts.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 9000);
+      }, 500);
+    }
+
+    function createBalloons() {
+      const balloons = document.getElementById("balloons");
+      const colors = ["#ff4e88", "#ffd166", "#06d6a0", "#118ab2", "#ffffff", "#ff85a2"];
+      setInterval(() => {
+        const balloon = document.createElement("div");
+        balloon.classList.add("balloon");
+        balloon.style.left = Math.random() * 100 + "vw";
+        balloon.style.background = colors[Math.floor(Math.random() * colors.length)];
+        balloon.style.animationDuration = (Math.random() * 5 + 8) + "s";
+        balloons.appendChild(balloon);
+
+        setTimeout(() => balloon.remove(), 13000);
+      }, 1200);
+    }
+
+    function rainHearts() {
+      for (let i = 0; i < 20; i++) {
+        setTimeout(() => {
+          const heart = document.createElement("div");
+          heart.classList.add("heart");
+          heart.innerHTML = ["💖", "💕", "💗", "💘"][Math.floor(Math.random() * 4)];
+          heart.style.left = Math.random() * 100 + "vw";
+          heart.style.fontSize = (Math.random() * 20 + 20) + "px";
+          heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+          document.body.appendChild(heart);
+
+          setTimeout(() => heart.remove(), 7000);
+        }, i * 150);
+      }
+    }
+
+    document.getElementById("mainArea").addEventListener("click", function(e) {
+      const heart = document.createElement("div");
+      heart.classList.add("click-heart");
+      heart.innerHTML = "💖";
+      heart.style.left = e.clientX + "px";
+      heart.style.top = e.clientY + "px";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 1000);
+    });
+
+    createStars();
+    createFloatingHearts();
+    createBalloons();
+  </script>
+</body>
+</html>
